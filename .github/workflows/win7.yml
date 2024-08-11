@@ -41,7 +41,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: ArmCordLegacyWindows
-          path: dist/ArmCord-3.3.0-win.zip
+          path: dist/ArmCord-3.2.8-win.zip
 
 
   release:
@@ -56,7 +56,7 @@ jobs:
           name: ArmCordLegacyWindows
           path: windows
       - name: Rename E22 zip
-        run: mv windows/ArmCord-3.3.0-win.zip windows/ArmCord-3.3.0-win7.zip
+        run: mv windows/ArmCord-3.2.8-win.zip windows/ArmCord-3.2.8-win7.zip
 
       - name: Get some values needed for the release
         id: vars
@@ -82,4 +82,4 @@ jobs:
           prerelease: true
           body_path: .github/win7.md
           files: |
-            windows/ArmCord-3.3.0-win7.zip
+            windows/ArmCord-3.2.8-win7.zip
