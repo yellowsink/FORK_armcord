@@ -115,9 +115,6 @@ export function registerIpc(): void {
     ipcMain.on("clientmod", async (event) => {
         event.returnValue = await getConfig("mods");
     });
-    ipcMain.on("legacyCapturer", async (event) => {
-        event.returnValue = await getConfig("useLegacyCapturer");
-    });
     ipcMain.on("trayIcon", async (event) => {
         event.returnValue = await getConfig("trayIcon");
     });

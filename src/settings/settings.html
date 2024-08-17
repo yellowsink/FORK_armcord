@@ -108,14 +108,6 @@
         </div>
         <br />
 
-        <div class="switch acDynamicIcon">
-            <label class="header" data-string="settings-dynamicIcon"></label>
-            <input id="dynamicIcon" class="tgl tgl-light left" data-setting="dynamicIcon" type="checkbox" />
-            <label class="tgl-btn left" for="dynamicIcon"></label>
-            <p class="description" data-string="settings-dynamicIcon-desc"></p>
-        </div>
-        <br />
-
         <div class="switch acSpellcheck">
             <label class="header" data-string="settings-spellcheck"></label>
             <input id="spellcheck" class="tgl tgl-light left" data-setting="spellcheck" type="checkbox" />
@@ -204,7 +196,13 @@
             <h1 data-string="settings-advanced" class="center advancedText"></h1>
             <br />
             <br />
-
+            <div class="switch acDynamicIcon">
+                <label class="header" data-string="settings-legacyDynamicIcon"></label>
+                <input id="dynamicIcon" class="tgl tgl-light left" data-setting="dynamicIcon" type="checkbox" />
+                <label class="tgl-btn left" for="dynamicIcon"></label>
+                <p class="description" data-string="settings-legacyDynamicIcon-desc"></p>
+            </div>
+            <br />
             <div>
                 <label class="header" data-string="settings-skipSplash"></label>
                 <input id="skipSplash" class="tgl tgl-light left" data-setting="skipSplash" type="checkbox" />
@@ -212,17 +210,6 @@
                 <p data-string="settings-skipSplash-desc" class="description"></p>
             </div>
             <br />
-            <div>
-                <label class="header" data-string="settings-useLegacyCapturer"></label>
-                <input
-                    id="useLegacyCapturer"
-                    class="tgl tgl-light left"
-                    data-setting="useLegacyCapturer"
-                    type="checkbox"
-                />
-                <label class="tgl-btn left" for="useLegacyCapturer"></label>
-                <p data-string="settings-useLegacyCapturer-desc" class="description"></p>
-            </div>
             <br />
             <button data-string="settings-pluginsFolder" data-open="Plugins" class="center"></button>
             <br />

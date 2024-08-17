@@ -176,9 +176,38 @@ async function doAfterDefiningTheWindow(): Promise<void> {
     }
     mainWindow.webContents.on("page-title-updated", async (e, title) => {
         const armCordSuffix = " - ArmCord"; /* identify */
+
+        // FIXME - This is a bit of a mess. I'm not sure how to clean it up.
+        if (process.platform === "win32" && !(await getConfig("dynamicIcon"))) {
+            if (title.startsWith("•"))
+                return mainWindow.setOverlayIcon(
+                    nativeImage.createFromPath(path.join(__dirname, "../", "/assets/badge-11.ico")),
+                    "You have some unread messages."
+                );
+            if (title.startsWith("(")) {
+                const pings = parseInt(/\((\d+)\)/.exec(title)![1]);
+                if (pings > 9) {
+                    return mainWindow.setOverlayIcon(
+                        nativeImage.createFromPath(path.join(__dirname, "../", "/assets/badge-10.ico")),
+                        "You have some unread messages."
+                    );
+                } else {
+                    return mainWindow.setOverlayIcon(
+                        nativeImage.createFromPath(path.join(__dirname, "../", "/assets/badge-" + pings + ".ico")),
+                        "You have some unread messages."
+                    );
+                }
+            }
+            mainWindow.setOverlayIcon(null, "");
+        }
+        if (process.platform === "darwin") {
+            if (title.startsWith("•")) return app.dock.setBadge("•");
+            if (title.startsWith("(")) return app.setBadgeCount(parseInt(/\((\d+)\)/.exec(title)![1]));
+            app.setBadgeCount(0);
+        }
         if (!title.endsWith(armCordSuffix)) {
             e.preventDefault();
-            await mainWindow.webContents.executeJavaScript(
+            void mainWindow.webContents.executeJavaScript(
                 `document.title = '${title.replace("Discord |", "") + armCordSuffix}'`
             );
         }

@@ -70,7 +70,6 @@ export function setup(): void {
         customJsBundle: "https://armcord.app/placeholder.js",
         customCssBundle: "https://armcord.app/placeholder.css",
         disableAutogain: false,
-        useLegacyCapturer: false,
         mobileMode: false,
         trayIcon: "default",
         doneSetup: false,
@@ -89,16 +88,7 @@ export function getVersion(): string {
     return packageVersion;
 }
 export function getDisplayVersion(): string {
-    //Checks if the app version # has 4 sections (3.1.0.0) instead of 3 (3.1.0) / Shitty way to check if Kernel Mod is installed
-    if ((app.getVersion() == packageVersion) == false) {
-        if ((app.getVersion() == process.versions.electron) == true) {
-            return `Dev Build (${packageVersion})`;
-        } else {
-            return `${packageVersion} [Modified]`;
-        }
-    } else {
-        return packageVersion;
-    }
+    return `Legacy Build`;
 }
 export async function injectJS(inject: string): Promise<void> {
     const js = await (await fetch(`${inject}`)).text();
@@ -280,7 +270,6 @@ export interface Settings {
     customJsBundle: RequestInfo | URL;
     customCssBundle: RequestInfo | URL;
     startMinimized: boolean;
-    useLegacyCapturer: boolean;
     tray: boolean;
     keybinds: Array<string>;
     inviteWebsocket: boolean;
