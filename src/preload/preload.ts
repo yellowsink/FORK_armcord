@@ -11,10 +11,8 @@ import {injectSettings} from "./settings";
 
 window.localStorage.setItem("hideNag", "true");
 
-if (ipcRenderer.sendSync("legacyCapturer")) {
-    console.warn("Using legacy capturer module");
-    import("./capturer");
-}
+console.warn("Using legacy capturer module");
+import("./capturer");
 
 const version = ipcRenderer.sendSync("displayVersion");
 async function updateLang(): Promise<void> {

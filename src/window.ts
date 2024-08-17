@@ -134,10 +134,6 @@ async function doAfterDefiningTheWindow(): Promise<void> {
         }
         return {action: "deny"};
     });
-    if ((await getConfig("useLegacyCapturer")) == false) {
-        console.log("Starting screenshare module...");
-        import("./screenshare/main");
-    }
 
     mainWindow.webContents.session.webRequest.onBeforeRequest(
         {urls: ["https://*/api/v*/science", "https://sentry.io/*", "https://*.nel.cloudflare.com/*"]},
