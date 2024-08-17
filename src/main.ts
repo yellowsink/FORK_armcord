@@ -127,8 +127,14 @@ if (!app.requestSingleInstanceLock() && getConfigSync("multiInstance") == (false
                 callback(true);
             }
         });
-        app.on("activate", async function () {
-            if (BrowserWindow.getAllWindows().length === 0) await init();
+        app.on("activate", function () {
+            if (BrowserWindow.getAllWindows().length === 0) {
+                void init();
+            } else {
+                BrowserWindow.getAllWindows().forEach((window) => {
+                    window.show();
+                });
+            }
         });
     });
 }
