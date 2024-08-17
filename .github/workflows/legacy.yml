@@ -70,6 +70,8 @@ jobs:
         
       - name: Build
         run: pnpm run build && electron-builder --macos zip --x64
+        env:
+                GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Upload artifact
         uses: actions/upload-artifact@v2
@@ -102,6 +104,8 @@ jobs:
         
       - name: Build
         run: pnpm run build && electron-builder --macos zip --x64
+        env:
+                GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Upload artifact
         uses: actions/upload-artifact@v2
