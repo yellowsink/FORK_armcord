@@ -167,7 +167,7 @@ jobs:
           prerelease: true
           body_path: .github/legacy.md
           files: |
-            windows/ArmCord-Legacy-win7.zip,
-            windows/ArmCord-Legacy-ia32-win7.zip
+            windows/ArmCord-Legacy-e22-win7.zip
+            windows/ArmCord-Legacy-ia32-e22-win7.zip
             mac/ArmCord-Legacy-e27-mac.zip
             mac/ArmCord-Legacy-e20-mac.zip
