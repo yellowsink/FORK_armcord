@@ -35,22 +35,6 @@
                 window.internal.restart();
             } else {
                 text.innerHTML = await internal.getLang("loading_screen_start");
-                if (window.internal.version === "3.3.0") {
-                    console.log("Running a development build of ArmCord. Skipping updater.");
-                } else {
-                    const response = await fetch("https://armcord.app/latest.json");
-                    const data = await response.json();
-                    if (data.version !== window.internal.version) {
-                        var elem = document.createElement("img");
-                        elem.classList.add("logo");
-                        elem.src = "https://armcord.app/update.webp";
-                        document.body.prepend(elem);
-                        document.getElementById("splashscreen-armcord").remove();
-                        text.innerHTML = await internal.getLang("loading_screen_update");
-                    } else {
-                        console.log("ArmCord is up to date.");
-                    }
-                }
 
                 function check() {
                     if (internal.installState === "installing") {
