@@ -3,12 +3,18 @@ import {injectTitlebar} from "../discord/preload/titlebar.mjs";
 import {Settings} from "../@types/settings.js";
 
 injectTitlebar();
+
+export const restart = () => ipcRenderer.send("setup-restart");
+export const getOS = () => ipcRenderer.sendSync("setup-getOS") as string;
+export const saveSettings = (...args: [Settings]) => ipcRenderer.send("setup-saveSettings", ...args);
+export const getLang = async (toGet: string) =>
+    await ipcRenderer.invoke("setup-getLang", toGet).then((result: string) => {
+        return result;
+    });
+
 contextBridge.exposeInMainWorld("armcordinternal", {
-    restart: () => ipcRenderer.send("setup-restart"),
-    getOS: ipcRenderer.sendSync("setup-getOS") as string, // String as far as I care.
-    saveSettings: (...args: [Settings]) => ipcRenderer.send("setup-saveSettings", ...args),
-    getLang: (toGet: string) =>
-        ipcRenderer.invoke("setup-getLang", toGet).then((result: string) => {
-            return result;
-        })
+    restart,
+    getOS,
+    saveSettings,
+    getLang
 });

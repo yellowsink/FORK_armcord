@@ -10,7 +10,6 @@
         "build:dev": "rollup -c --environment BUILD:dev",
         "build": "pnpm build:plugins && rollup -c --environment BUILD:prod",
         "build:plugins": "lune ci --repoSubDir src/shelter --to ts-out/plugins && node ./scripts/fixBundles.js",
-        "start": "pnpm build:plugins && pnpm run build:dev && electron --trace-warnings ./ts-out/main.js",
         "runElectron": "electron --trace-warnings ./ts-out/main.js",
         "startThemeManager": "pnpm run build:dev && electron ./ts-out/main.js themes",
         "startWayland": "pnpm run build:dev && electron ./ts-out/main.js --ozone-platform-hint=auto --enable-features=WebRTCPipeWireCapturer,WaylandWindowDecorations",
@@ -19,7 +18,10 @@
         "format": "prettier --write src *.json",
         "lint": "eslint",
         "CIbuild": "pnpm run build && electron-builder --linux zip && electron-builder --windows zip && electron-builder --macos zip",
-        "prepare": "git config --local core.hooksPath .hooks/"
+        "prepare": "git config --local core.hooksPath .hooks/",
+        "start": "electron-vite preview -- --ozone-platform-hint=auto",
+        "dev": "electron-vite dev -- --ozone-platform-hint=auto",
+        "prebuild": "electron-vite build"
     },
     "repository": {
         "type": "git",
@@ -34,29 +36,26 @@
     "homepage": "https://github.com/armcord/armcord#readme",
     "devDependencies": {
         "@eslint/js": "^9.10.0",
-        "@rollup/plugin-commonjs": "^26.0.1",
-        "@rollup/plugin-esm-shim": "^0.1.7",
-        "@rollup/plugin-json": "^6.1.0",
-        "@rollup/plugin-typescript": "^11.1.6",
         "@types/node": "^22.5.5",
+        "@types/react": "^18.3.6",
         "@types/ws": "^8.5.12",
         "@uwu/lune": "^1.4.2",
         "@uwu/shelter-defs": "^1.4.1",
         "electron": "32.1.0",
         "electron-builder": "^25.0.5",
+        "electron-vite": "^2.3.0",
         "eslint": "^9.10.0",
         "prettier": "^3.3.3",
-        "rollup": "^4.21.3",
-        "rollup-plugin-copy": "^3.5.0",
-        "rollup-plugin-esbuild": "^6.1.1",
         "typescript": "^5.6.2",
-        "typescript-eslint": "^8.5.0"
+        "typescript-eslint": "^8.5.0",
+        "typescript-plugin-css-modules": "^5.1.0"
     },
     "dependencies": {
         "arrpc": "github:armcord/arrpc",
         "electron-context-menu": "^4.0.4",
         "electron-is-dev": "^3.0.1",
         "v8-compile-cache": "^2.4.0",
+        "vite-css-modules": "^1.4.2",
         "ws": "^8.18.0"
     },
     "packageManager": "pnpm@9.10.0+sha512.73a29afa36a0d092ece5271de5177ecbf8318d454ecd701343131b8ebc0c1a91c487da46ab77c8e596d6acf1461e3594ced4becedf8921b074fbd8653ed7051c",
